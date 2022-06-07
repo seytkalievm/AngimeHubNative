@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="HeaderText">
+        <item name="android:fontFamily">@font/open_sans_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RegularText">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:layout_margin">4dp</item>
+    </style>
+
+    <style name="TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="minHeight">48dp</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="boxBackgroundColor">@color/dark_blue_80</item>
+        <item name="boxCornerRadiusBottomEnd">15dp</item>
+        <item name="boxCornerRadiusBottomStart">15dp</item>
+        <item name="boxCornerRadiusTopEnd">15dp</item>
+        <item name="boxCornerRadiusTopStart">15dp</item>
+        <item name="boxStrokeColor">@color/grey</item>
+        <item name="hintTextColor">@color/grey</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+
+    </style>
+
+    <style name="ButtonTeal">
+        <item name="minHeight">48dp</item>
+        <item name="backgroundTint">@color/teal</item>
+        <item name="cornerRadius">15dp</item>
+        <item name="fontFamily">@font/open_sans_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="TextButton">
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">@color/teal</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:fontFamily">@font/open_sans_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>
