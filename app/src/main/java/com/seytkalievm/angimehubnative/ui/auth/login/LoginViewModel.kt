@@ -4,15 +4,20 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-val TAG = "LoginViewModel"
+import javax.inject.Inject
 
-class LoginViewModel: ViewModel() {
+const val TAG = "LoginViewModel"
+
+class LoginViewModel @Inject constructor():ViewModel() {
 
     private var email = ""
     private var password = ""
     private val _canLogin = MutableLiveData<Boolean>(false)
     val canLogin: LiveData<Boolean> get() = _canLogin
 
+    init {
+        Log.i(TAG,this.toString())
+    }
 
     fun credentialsChanged(email: String?, password: String?){
         this.email = email?: this.email

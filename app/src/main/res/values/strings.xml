@@ -13,4 +13,7 @@
     <string name="first_name">First name</string>
     <string name="second_name">Second name</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="stand_up_shows">Stand-Up Shows</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="saved_recordings">Saved Recordings</string>
 </resources>

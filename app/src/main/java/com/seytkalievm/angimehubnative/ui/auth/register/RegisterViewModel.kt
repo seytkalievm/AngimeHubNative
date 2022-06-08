@@ -2,10 +2,11 @@ package com.seytkalievm.angimehubnative.ui.auth.register
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
 val TAG = "RegistrationViewModel"
 
-class RegisterViewModel: ViewModel() {
+class RegisterViewModel @Inject constructor(): ViewModel() {
     private var firstName = ""
     private var secondName = ""
     private var email = ""
@@ -13,7 +14,7 @@ class RegisterViewModel: ViewModel() {
     private var confPassword = ""
 
     init {
-        Log.w(TAG,"Created")
+        Log.i(TAG,this.toString())
     }
     fun credentialsChanged(
         firstName: String? = null,

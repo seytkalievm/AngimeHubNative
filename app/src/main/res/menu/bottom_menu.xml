@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/standUpFragment"
+        android:title="@string/stand_up_shows"
+        android:icon="@drawable/ic_baseline_mic_none_24" />
+
+    <item
+        android:id="@+id/podcastsFragment"
+        android:title="@string/podcasts"
+        android:icon="@drawable/ic_baseline_center_focus_strong_24"/>
+
+    <item
+        android:id="@+id/savedFragment"
+        android:title="@string/saved_recordings"
+        android:icon="@drawable/ic_baseline_bookmark_border_24" />
+
+</menu>
