@@ -40,6 +40,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInput"
+                android:id="@+id/register_first_name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -53,6 +54,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInput"
+                android:id="@+id/register_second_name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -67,6 +69,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInput"
+                android:id="@+id/register_email_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -81,6 +84,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInput"
+                android:id="@+id/register_password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:passwordToggleEnabled="true">
@@ -96,6 +100,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInput"
+                android:id="@+id/register_conf_password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:passwordToggleEnabled="true">

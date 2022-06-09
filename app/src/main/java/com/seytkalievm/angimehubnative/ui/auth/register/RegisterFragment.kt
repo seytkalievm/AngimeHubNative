@@ -52,20 +52,44 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.i("RegisterFragment", this.toString())
 
+        viewModel.formState.observe(viewLifecycleOwner){
+            if (it.firstNameError != null){
+                binding.registerFirstNameLayout.error = getString(it.firstNameError!!)
+            }
+
+            if (it.firstNameError != null){
+                binding.registerFirstNameLayout.error = getString(it.firstNameError!!)
+            }
+            if(it.emailError != null){
+                binding.registerEmailLayout.error = getString(it.emailError!!)
+            }
+            if(it.passwordError != null){
+                binding.registerPasswordLayout.error = getString(it.passwordError!!)
+            }
+            if (it.confPasswordError!=null){
+                binding.registerConfPasswordLayout.error  = getString(it.confPasswordError!!)
+            }
+        }
+
         binding.apply {
             registerFirstNameEt.addTextChangedListener {
+                registerFirstNameLayout.error = null
                 viewModel.credentialsChanged(firstName = it.toString().trim())
             }
             registerSecondNameEt.addTextChangedListener{
+                registerSecondNameLayout.error = null
                 viewModel.credentialsChanged(secondName = it.toString().trim())
             }
             registerEmailEt.addTextChangedListener {
+                registerEmailLayout.error = null
                 viewModel.credentialsChanged(email = it.toString().trim())
             }
             registerPasswordEt.addTextChangedListener {
+                registerPasswordLayout.error = null
                 viewModel.credentialsChanged(password = it.toString())
             }
             registerConfPasswordEt.addTextChangedListener {
+                registerConfPasswordLayout.error = null
                 viewModel.credentialsChanged(confPassword = it.toString())
             }
 
