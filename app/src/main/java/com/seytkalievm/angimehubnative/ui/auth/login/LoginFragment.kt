@@ -1,39 +1,25 @@
 package com.seytkalievm.angimehubnative.ui.auth.login
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.seytkalievm.angimehubnative.MyApplication
-import com.seytkalievm.angimehubnative.R
+import androidx.fragment.app.viewModels
 import com.seytkalievm.angimehubnative.databinding.FragmentLoginBinding
-import com.seytkalievm.angimehubnative.di.viewmodel.ViewModelFactory
 import com.seytkalievm.angimehubnative.ui.auth.AuthActivity
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
-
-class LoginFragment : Fragment() {
+@AndroidEntryPoint
+class LoginFragment @Inject constructor(): Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: LoginViewModel
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
+    private val viewModel: LoginViewModel by viewModels()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (activity?.application as MyApplication).appComponent.inject(this)
-        viewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,10 +35,6 @@ class LoginFragment : Fragment() {
 
         binding.loginSignUpBtn.setOnClickListener{
             (activity as AuthActivity).goToRegister()
-        }
-
-        viewModel.canLogin.observe(viewLifecycleOwner){
-            binding.loginSignInBtn.isEnabled = it
         }
 
         binding.loginEmailEt.addTextChangedListener{

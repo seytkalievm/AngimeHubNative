@@ -5,12 +5,22 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.seytkalievm.angimehubnative.R
+import com.seytkalievm.angimehubnative.models.User
+import com.seytkalievm.angimehubnative.network.BaseApi
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ActivityScoped
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 val TAG = "RegistrationViewModel"
 
-class RegisterViewModel @Inject constructor(): ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(
+    private val baseApi: BaseApi
+): ViewModel() {
     private var firstName = ""
     private var secondName = ""
     private var email = ""
@@ -40,7 +50,19 @@ class RegisterViewModel @Inject constructor(): ViewModel() {
         validateForm()
         if (isFormValid){
             //TODO - add API call
-            Log.i(TAG, "$firstName, $secondName, $email, $password")
+            viewModelScope.launch {
+                try{
+                    Log.i(TAG, "$firstName, $secondName, $email, $password")
+                    val response = baseApi.register(
+                        User(firstName, secondName, email, password)
+                    )
+                    Log.i(TAG, "register: $response")
+                } catch (e: Exception){
+                    Log.i(TAG, "register: $e")
+                } catch (e: Error){
+                    Log.e(TAG, "register: $e", )
+                }
+            }
         }
     }
 
@@ -107,5 +129,9 @@ class RegisterViewModel @Inject constructor(): ViewModel() {
         }
     }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+        Log.i(TAG, "onCleared")
+    }
 }
