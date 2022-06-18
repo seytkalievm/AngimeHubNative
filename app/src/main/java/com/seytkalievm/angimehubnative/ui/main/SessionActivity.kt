@@ -8,19 +8,19 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.seytkalievm.angimehubnative.R
-import com.seytkalievm.angimehubnative.databinding.ActivityMainBinding
+import com.seytkalievm.angimehubnative.databinding.ActivitySessionBinding
 
-class MainActivity : AppCompatActivity() {
+class SessionActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var bottomNavBar: BottomNavigationView
     private lateinit var toolBar: Toolbar
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivitySessionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater).apply {
+        binding = ActivitySessionBinding.inflate(layoutInflater).apply {
             toolBar = mainActivityToolbar
             bottomNavBar = bottomNavMenu
             toolBar.setTitle(R.string.stand_up_shows)

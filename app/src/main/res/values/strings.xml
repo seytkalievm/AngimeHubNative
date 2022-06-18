@@ -24,6 +24,14 @@
     <string name="invalid_password_no_lower">Password must contain at least one lower-case letter [a-z]</string>
     <string name="invalid_password_numeric">Password must contain at least one digit [0–9]</string>
     <string name="password_do_not_match">Passwords do not match</string>
+    <string name="incorrect_credentials">Wrong email or password</string>
+    <string name="connection_error">No Internet connection. Try again later</string>
+    <string name="unknown_error">Unknown error. Try again later</string>
+    <string name="user_already_exist">User with this email already exist</string>
+    <string name="empty_email">Please, enter email</string>
+    <string name="empty_password">Please, enter password</string>
     <!-- End error messages -->
+
+    <string name="logging_in">Logging in</string>
 
 </resources>

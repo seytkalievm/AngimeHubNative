@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.seytkalievm.angimehubnative.R
 import com.seytkalievm.angimehubnative.databinding.FragmentSavedBinding
-import com.seytkalievm.angimehubnative.ui.main.MainActivity
+import com.seytkalievm.angimehubnative.ui.main.SessionActivity
 
 const val TAG = "Saved fragment"
 class SavedFragment : Fragment() {
@@ -22,7 +22,7 @@ class SavedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as MainActivity).supportActionBar?.setTitle(R.string.saved_recordings)
+        (activity as SessionActivity).supportActionBar?.setTitle(R.string.saved_recordings)
         binding = FragmentSavedBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.seytkalievm.angimehubnative.R
 import com.seytkalievm.angimehubnative.databinding.FragmentPodcastsBinding
-import com.seytkalievm.angimehubnative.ui.main.MainActivity
+import com.seytkalievm.angimehubnative.ui.main.SessionActivity
 
 class PodcastsFragment : Fragment() {
 
@@ -19,7 +19,7 @@ class PodcastsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as MainActivity).supportActionBar?.setTitle(R.string.podcasts)
+        (activity as SessionActivity).supportActionBar?.setTitle(R.string.podcasts)
         binding = FragmentPodcastsBinding.inflate(inflater, container, false)
         return binding.root
     }
