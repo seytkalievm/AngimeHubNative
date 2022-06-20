@@ -118,7 +118,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/register_sign_up_btn"
-            style="@style/ButtonTeal"
+            style="@style/RectangleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sign_up"
