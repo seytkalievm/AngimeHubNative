@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seytkalievm.angimehubnative.R
-import com.seytkalievm.angimehubnative.domain.UserManager
 import com.seytkalievm.angimehubnative.models.NewUser
 import com.seytkalievm.angimehubnative.models.User
 import com.seytkalievm.angimehubnative.network.BaseApi
+import com.seytkalievm.angimehubnative.storage.UserProtoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -22,7 +22,7 @@ const val TAG = "RegistrationViewModel"
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val userManager: UserManager,
+    private val userProtoRepository: UserProtoRepository,
     private val baseApi: BaseApi
 ): ViewModel() {
     private var firstName = ""
@@ -66,10 +66,10 @@ class RegisterViewModel @Inject constructor(
                     Log.i(TAG, "$firstName, $secondName, $email, $password")
                     baseApi.register(NewUser(firstName, secondName, email, password))
                     val token = baseApi.login(email, password)
-                    val user = baseApi.getUserInfo(token)
-                    user.token = token
+                    var user = baseApi.getUserInfo(token)
+                    user = user.setToken(token)
                     Log.i(TAG, "Register user: $user")
-                    userManager.addUser(user)
+                    userProtoRepository.setUser(user)
                     _user.postValue(user)
 
                 } catch (e: HttpException){
@@ -77,7 +77,7 @@ class RegisterViewModel @Inject constructor(
                 } catch (e: ConnectException){
                     _error.postValue(R.string.connection_error)
                 } catch (e:Exception){
-                    Log.e(TAG, "register: $e", )
+                    Log.e(TAG, "register: $e")
                     _error.postValue(R.string.unknown_error)
                 } catch (e: Error){
                     Log.e(TAG, "Login: $e")
