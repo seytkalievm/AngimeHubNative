@@ -21,6 +21,9 @@ interface BaseApi {
     @GET("user/info")
     suspend fun getUserInfo(@Query("token") token: String): User
 
+    @POST("user/becomeartist")
+    suspend fun becomeArtist(@Query("token") token: String)
+
     @GET("artist/getPopular")
     suspend fun getPopularArtists():List<ArtistPreview>
 
@@ -36,7 +39,19 @@ interface BaseApi {
     @GET("media/videoFullInfo")
     suspend fun getFullShowInfo(@Query("videoId") videoId: Int): Show
 
-    @GET("user/recordings")
+    @POST("user/favourite/add")
+    suspend fun addToFavourites(
+        @Query("token") token: String,
+        @Query("videoId") videoId: Int
+    )
+
+    @POST("user/favourite/delete")
+    suspend fun deleteFromFavourites(
+        @Query("token") token: String,
+        @Query("videoId") videoId: Int
+    )
+
+    @GET("user/favourite/get")
     suspend fun getFavorites(@Query("token") token: String): List<ShowPreview>
 
     @GET("search")
