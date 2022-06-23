@@ -10,4 +10,8 @@ data class ShowPreview (
     @field:Json(name = "idVideo") val id: Int,
     @field:Json(name = "artistFirstName") val artistFirstName: String,
     @field:Json(name = "artistSecondName") val artistSecondName: String,
-)
+){
+    fun artistName(): String{
+        return "$artistFirstName $artistSecondName"
+    }
+}
