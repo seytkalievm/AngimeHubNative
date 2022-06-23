@@ -22,4 +22,9 @@ data class User(
     fun isNull():Boolean{
         return token=="" && email == ""
     }
+
+    fun getName(): String{
+        return "$firstName $secondName"
+    }
+
 }
