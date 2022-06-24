@@ -30,7 +30,7 @@ interface BaseApi {
     @GET("standup/getPopulars")
     suspend fun getPopularStandUps(): List<ShowPreview>
 
-    @GET("podcasts/getPopulars")
+    @GET("podcast/getPopulars")
     suspend fun getPopularPodcasts(): List<ShowPreview>
 
     @GET("artist/getInfo")
