@@ -18,8 +18,8 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="95dp"
-            android:layout_height="80dp"
+            android:layout_width="85dp"
+            android:layout_height="60dp"
             app:cardCornerRadius="16dp">
 
             <ImageView
@@ -43,7 +43,9 @@
             <TextView
                 android:id="@+id/preview_show_name_tv"
                 style="@style/RegularText"
-                android:layout_width="wrap_content"
+                android:gravity="start"
+                android:maxLines="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:text="@{show.name}"
@@ -51,7 +53,7 @@
 
             <TextView
                 android:id="@+id/preview_show_artist_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:text="@{show.artistName()}"
