@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seytkalievm.angimehubnative.R
 import com.seytkalievm.angimehubnative.databinding.FragmentStandUpBinding
@@ -17,6 +18,7 @@ import com.seytkalievm.angimehubnative.models.ShowPreview
 import com.seytkalievm.angimehubnative.ui.adapters.ArtistPreviewAdapter
 import com.seytkalievm.angimehubnative.ui.adapters.ShowPreviewAdapter
 import com.seytkalievm.angimehubnative.ui.main.SessionActivity
+import com.seytkalievm.angimehubnative.ui.main.podcast.PodcastsFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 const val TAG = "Stand up fragment"
@@ -70,7 +72,10 @@ class StandUpFragment : Fragment() {
     }
 
     private fun showArtistProfile(artist: ArtistPreview){
-        Toast.makeText(this.context, artist.getName(), Toast.LENGTH_SHORT).show()
+        val id = artist.Id
+        val action = StandUpFragmentDirections.actionStandUpFragmentToArtistPageFragment(id)
+        (activity as SessionActivity).updateToolbar("About an artist", true)
+        findNavController().navigate(action)
     }
 
     private fun playMedia(show: ShowPreview){

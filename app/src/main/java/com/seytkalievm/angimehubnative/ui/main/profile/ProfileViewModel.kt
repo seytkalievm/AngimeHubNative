@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.seytkalievm.angimehubnative.models.User
 import com.seytkalievm.angimehubnative.storage.UserProtoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

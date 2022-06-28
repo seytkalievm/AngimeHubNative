@@ -58,6 +58,7 @@ class SessionActivity : AppCompatActivity() {
     override fun onBackPressed() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         bottomNavBar.visibility = VISIBLE
+        binding.sessionShowProfileIb.visibility = VISIBLE
         super.onBackPressed()
     }
 
@@ -77,6 +78,7 @@ class SessionActivity : AppCompatActivity() {
     private fun showProfile(){
         toolBar.setTitle(R.string.profile)
         bottomNavBar.uncheckAllItems()
+        binding.sessionShowProfileIb.visibility = GONE
         navController.navigate(R.id.profileFragment)
     }
 
@@ -87,4 +89,9 @@ class SessionActivity : AppCompatActivity() {
         finish()
     }
 
+    fun updateToolbar(title: String, supportNavigateBack: Boolean){
+        toolBar.title = title
+        supportActionBar?.setDisplayHomeAsUpEnabled(supportNavigateBack)
+        binding.sessionShowProfileIb.visibility = GONE
+    }
 }

@@ -1,13 +1,8 @@
 package com.seytkalievm.angimehubnative.storage
 
 import android.content.Context
-import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import com.seytkalievm.angimehubnative.models.User
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
