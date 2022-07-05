@@ -7,9 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seytkalievm.angimehubnative.R
-import com.seytkalievm.angimehubnative.models.NewUser
 import com.seytkalievm.angimehubnative.models.User
 import com.seytkalievm.angimehubnative.network.BaseApi
+import com.seytkalievm.angimehubnative.network.auth.AuthRepository
+import com.seytkalievm.angimehubnative.network.auth.model.UserRegisterRequest
 import com.seytkalievm.angimehubnative.storage.UserProtoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancel
@@ -23,7 +24,7 @@ const val TAG = "RegistrationViewModel"
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val userProtoRepository: UserProtoRepository,
-    private val baseApi: BaseApi
+    private val authRepository: AuthRepository,
 ): ViewModel() {
     private var firstName = ""
     private var secondName = ""
@@ -60,14 +61,8 @@ class RegisterViewModel @Inject constructor(
         if (isFormValid){
             viewModelScope.launch {
                 try{
-                    // Since API does not return user Token after registration
-                    // in order not to redirect user to login page for better experience
-                    // user token and all corresponding data is fetched here
-                    Log.i(TAG, "$firstName, $secondName, $email, $password")
-                    baseApi.register(NewUser(firstName, secondName, email, password))
-                    val token = baseApi.login(email, password)
-                    var user = baseApi.getUserInfo(token)
-                    user = user.setToken(token)
+                    val user = authRepository
+                        .register(UserRegisterRequest(firstName, secondName, email, password))
                     Log.i(TAG, "Register user: $user")
                     userProtoRepository.setUser(user)
                     _user.postValue(user)

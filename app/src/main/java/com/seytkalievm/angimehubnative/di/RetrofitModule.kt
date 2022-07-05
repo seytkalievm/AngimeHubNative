@@ -2,6 +2,7 @@ package com.seytkalievm.angimehubnative.di
 
 
 import com.seytkalievm.angimehubnative.network.BaseApi
+import com.seytkalievm.angimehubnative.network.auth.AuthApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -45,4 +46,14 @@ object RetrofitModule {
             .create(BaseApi::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun provideAuthApi(moshi: Moshi): AuthApi{
+        return Retrofit.Builder()
+            .baseUrl("http://35.246.32.45:80/user/")
+            .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
+            .client(client)
+            .build()
+            .create(AuthApi::class.java)
+    }
 }
