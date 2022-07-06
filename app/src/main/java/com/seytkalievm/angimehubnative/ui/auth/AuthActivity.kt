@@ -16,38 +16,9 @@ import javax.inject.Inject
 @ActivityScoped
 class AuthActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var registerFragment: RegisterFragment
-
-    @Inject
-    lateinit var loginFragment: LoginFragment
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-        supportFragmentManager.beginTransaction()
-            .add(R.id.AuthFragmentContainer, registerFragment)
-            .add(R.id.AuthFragmentContainer, loginFragment)
-            .attach(loginFragment)
-            .show(loginFragment)
-            .commit()
-
-    }
-
-    fun goToRegister(){
-        supportFragmentManager.beginTransaction()
-            .detach(loginFragment)
-            .attach(registerFragment)
-            .show(registerFragment)
-            .commit()
-    }
-
-    fun goToLogin(){
-        supportFragmentManager.beginTransaction()
-            .detach(registerFragment)
-            .attach(loginFragment)
-            .show(loginFragment)
-            .commit()
     }
 
     fun startSession(){
