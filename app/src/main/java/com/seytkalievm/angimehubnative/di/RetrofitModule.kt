@@ -1,8 +1,9 @@
 package com.seytkalievm.angimehubnative.di
 
 
-import com.seytkalievm.angimehubnative.network.BaseApi
+import com.seytkalievm.angimehubnative.network.artist.ArtistApi
 import com.seytkalievm.angimehubnative.network.auth.AuthApi
+import com.seytkalievm.angimehubnative.network.shows.ShowsApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -37,17 +38,6 @@ object RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(moshi: Moshi): BaseApi{
-        return Retrofit.Builder()
-            .baseUrl("http://35.246.32.45:80/")
-            .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
-            .client(client)
-            .build()
-            .create(BaseApi::class.java)
-    }
-
-    @Singleton
-    @Provides
     fun provideAuthApi(moshi: Moshi): AuthApi{
         return Retrofit.Builder()
             .baseUrl("http://35.246.32.45:80/user/")
@@ -55,5 +45,27 @@ object RetrofitModule {
             .client(client)
             .build()
             .create(AuthApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideShowsApi(moshi: Moshi): ShowsApi{
+        return Retrofit.Builder()
+            .baseUrl("http://35.246.32.45:80/")
+            .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
+            .client(client)
+            .build()
+            .create(ShowsApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideArtistApi(moshi: Moshi): ArtistApi{
+        return Retrofit.Builder()
+            .baseUrl("http://35.246.32.45:80/")
+            .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
+            .client(client)
+            .build()
+            .create(ArtistApi::class.java)
     }
 }

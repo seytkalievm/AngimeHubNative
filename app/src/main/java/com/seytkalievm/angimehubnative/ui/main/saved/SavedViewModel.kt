@@ -5,9 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.seytkalievm.angimehubnative.MyApplication
 import com.seytkalievm.angimehubnative.models.ShowPreview
-import com.seytkalievm.angimehubnative.network.BaseApi
+import com.seytkalievm.angimehubnative.network.shows.ShowsApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,8 +15,8 @@ private const val TAG = "SavedViewModel"
 
 @HiltViewModel
 class SavedViewModel @Inject constructor(
-    private val api: BaseApi,
-    private val token:String,
+    private val api: ShowsApi,
+    private val token: String,
 ): ViewModel() {
 
     private val _error = MutableLiveData(0)
