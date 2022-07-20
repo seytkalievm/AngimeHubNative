@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 private const val USER_PREFERENCES_NAME = "user_preferences"
@@ -20,9 +21,13 @@ private val Context.dataStore by dataStore(
 class UserProtoRepository @Inject constructor(context: Context){
 
     private val dataStore = context.dataStore
+    private lateinit var _token: String
+    val token get() = _token
 
-    fun getUser(): Flow<User> {
-        return dataStore.data
+    suspend fun getUser(): User {
+        val user = dataStore.data.first()
+        _token = user.token
+        return user
     }
 
     suspend fun setUser(user: User) {

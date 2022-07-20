@@ -18,4 +18,10 @@ object ProtoDataStoreModule {
     fun provideProtoDataStore(@ApplicationContext context: Context): UserProtoRepository{
         return UserProtoRepository(context)
     }
+
+    @Singleton
+    @Provides
+    fun provideToken(repo: UserProtoRepository): String{
+        return repo.token
+    }
 }
