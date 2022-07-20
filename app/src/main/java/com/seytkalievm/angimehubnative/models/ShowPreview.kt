@@ -4,12 +4,12 @@ import com.squareup.moshi.Json
 
 
 data class ShowPreview (
-    @field:Json(name = "urlImage") val imageUrl: String,
-    @field:Json(name = "urlVideo") val videoUrl: String,
-    @field:Json(name = "mediaName") val name: String,
-    @field:Json(name = "idVideo") val id: Int,
-    @field:Json(name = "artistFirstName") val artistFirstName: String,
-    @field:Json(name = "artistSecondName") val artistSecondName: String,
+    @Json(name = "urlImage") val imageUrl: String,
+    @Json(name = "urlVideo") val videoUrl: String,
+    @Json(name = "mediaName") val name: String,
+    @Json(name = "idVideo") val id: Int,
+    @Json(name = "artistFirstName") val artistFirstName: String,
+    @Json(name = "artistSecondName") val artistSecondName: String,
 ){
     fun artistName(): String{
         return "$artistFirstName $artistSecondName"
