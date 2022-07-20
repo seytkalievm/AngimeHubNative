@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         var user: User
         runBlocking {
-            user = userProtoRepository.getUser().first()
+            user = userProtoRepository.getUser()
         }
 
         Log.i(TAG, "onCreate: $user")

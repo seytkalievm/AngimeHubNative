@@ -1,20 +1,26 @@
 package com.seytkalievm.angimehubnative.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.seytkalievm.angimehubnative.R
 import com.seytkalievm.angimehubnative.databinding.ActivitySessionBinding
+import com.seytkalievm.angimehubnative.ui.auth.AuthActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 const val TAG = "SessionActivity"
 
+@AndroidEntryPoint
 class SessionActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -74,5 +80,11 @@ class SessionActivity : AppCompatActivity() {
         navController.navigate(R.id.profileFragment)
     }
 
+    fun logout(){
+        val intent = Intent(this, AuthActivity::class.java)
+        startActivity(intent)
+        Log.i(TAG, "logout: trying to finish an activity")
+        finish()
+    }
 
 }
