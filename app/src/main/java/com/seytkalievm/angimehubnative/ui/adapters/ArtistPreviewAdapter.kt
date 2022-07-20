@@ -1,17 +1,26 @@
 package com.seytkalievm.angimehubnative.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.seytkalievm.angimehubnative.databinding.ArtistCardBinding
 import com.seytkalievm.angimehubnative.models.ArtistPreview
 
-class ArtistPreviewAdapter(private val artists: List<ArtistPreview>)
-    : RecyclerView.Adapter<ArtistPreviewAdapter.ArtistViewHolder>() {
+class ArtistPreviewAdapter(
+    private val artists: List<ArtistPreview>,
+    private val onClickListener: OnItemClickListener
+) : RecyclerView.Adapter<ArtistPreviewAdapter.ArtistViewHolder>() {
+
     inner class ArtistViewHolder(private val binding: ArtistCardBinding)
-        : RecyclerView.ViewHolder(binding.root){
+        : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         fun bind(artist: ArtistPreview){
             binding.artist = artist
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            onClickListener.onClick(artists[adapterPosition])
         }
     }
 
@@ -29,5 +38,8 @@ class ArtistPreviewAdapter(private val artists: List<ArtistPreview>)
         return artists.size
     }
 
+    class OnItemClickListener(val clickListener: (artist: ArtistPreview) -> Unit){
+        fun onClick(artist: ArtistPreview) = clickListener(artist)
+    }
 
 }
