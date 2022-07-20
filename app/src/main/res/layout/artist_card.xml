@@ -1,37 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="4dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="artist"
+            type="com.seytkalievm.angimehubnative.models.ArtistPreview" />
+    </data>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="95dp"
+        android:layout_height="125dp"
+        android:layout_margin="4dp"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
             app:cardCornerRadius="16dp">
 
             <ImageView
                 android:id="@+id/artist_card_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                imageUrl="@{artist.imageUrl}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/avatars" />
         </androidx.cardview.widget.CardView>
 
-
         <TextView
             android:id="@+id/artist_card_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:gravity="start"
+            android:textSize="12sp"
             style="@style/RegularText"
-            android:text="@string/artist_name" />
+            android:text="@{artist.name}"
+            tools:text="@string/artist_name"/>
+
     </LinearLayout>
 
-</FrameLayout>
+</layout>

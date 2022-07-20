@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seytkalievm.angimehubnative.R
-import com.seytkalievm.angimehubnative.domain.UserManager
 import com.seytkalievm.angimehubnative.models.User
 import com.seytkalievm.angimehubnative.network.BaseApi
+import com.seytkalievm.angimehubnative.storage.UserProtoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ const val TAG = "LoginViewModel"
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val userManager: UserManager,
+    private val userProtoRepository: UserProtoRepository,
     private val baseApi: BaseApi
 ):ViewModel() {
 
@@ -49,20 +49,20 @@ class LoginViewModel @Inject constructor(
                 try{
                     //since Login API call returns only token, rest of the data is fetched afterwards
                     val token = baseApi.login(email, password)
-                    val user = baseApi.getUserInfo(token)
-                    user.token = token
+                    var user = baseApi.getUserInfo(token)
+                    user = user.setToken(token)
                     Log.i(TAG, "logIn user: $user")
-                    userManager.addUser(user)
+                    userProtoRepository.setUser(user)
                     _user.postValue(user)
                 } catch (e: HttpException){
                     _error.postValue(R.string.incorrect_credentials)
                 }  catch (e: ConnectException){
                     _error.postValue(R.string.connection_error)
                 } catch (e: Error){
-                    Log.e(TAG, "logIn: $e", )
+                    Log.e(TAG, "logIn: $e" )
                     _error.postValue(R.string.unknown_error)
                 } catch (e: Exception){
-                    Log.e(TAG, "logIn: $e", )
+                    Log.e(TAG, "logIn: $e" )
                     _error.postValue(R.string.unknown_error)
                 }
             }
