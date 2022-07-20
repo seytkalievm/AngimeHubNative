@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.seytkalievm.angimehubnative.R
 import com.seytkalievm.angimehubnative.databinding.FragmentLoginBinding
 import com.seytkalievm.angimehubnative.ui.auth.AuthActivity
+import com.seytkalievm.angimehubnative.ui.auth.register.RegisterFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,6 +37,7 @@ class LoginFragment @Inject constructor(): Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var toast: Toast? = null
+        val navController = this.findNavController()
 
         viewModel.user.observe(viewLifecycleOwner){
             if (it != null) (activity as AuthActivity).startSession()
@@ -54,7 +58,7 @@ class LoginFragment @Inject constructor(): Fragment() {
         }
 
         binding.loginSignUpBtn.setOnClickListener{
-            (activity as AuthActivity).goToRegister()
+            navController.navigate(R.id.registerFragment2)
         }
 
         binding.loginEmailEt.addTextChangedListener{

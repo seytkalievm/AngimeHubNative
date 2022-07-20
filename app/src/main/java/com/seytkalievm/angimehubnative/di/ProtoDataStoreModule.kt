@@ -2,6 +2,7 @@ package com.seytkalievm.angimehubnative.di
 
 import android.content.Context
 import com.seytkalievm.angimehubnative.storage.UserProtoRepository
+import com.seytkalievm.angimehubnative.storage.protodatastore.UserProtoRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,12 +17,12 @@ object ProtoDataStoreModule {
     @Singleton
     @Provides
     fun provideProtoDataStore(@ApplicationContext context: Context): UserProtoRepository{
-        return UserProtoRepository(context)
+        return UserProtoRepositoryImpl(context)
     }
 
     @Singleton
     @Provides
     fun provideToken(repo: UserProtoRepository): String{
-        return repo.token
+        return repo.getToken()
     }
 }

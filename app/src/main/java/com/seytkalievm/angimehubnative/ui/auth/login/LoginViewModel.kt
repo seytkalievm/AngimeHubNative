@@ -7,7 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seytkalievm.angimehubnative.R
 import com.seytkalievm.angimehubnative.models.User
-import com.seytkalievm.angimehubnative.network.BaseApi
+import com.seytkalievm.angimehubnative.network.auth.AuthRepository
+import com.seytkalievm.angimehubnative.network.auth.model.UserLoginRequest
 import com.seytkalievm.angimehubnative.storage.UserProtoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancel
@@ -21,7 +22,7 @@ const val TAG = "LoginViewModel"
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val userProtoRepository: UserProtoRepository,
-    private val baseApi: BaseApi
+    private val authRepository: AuthRepository
 ):ViewModel() {
 
     private var email = ""
@@ -47,15 +48,17 @@ class LoginViewModel @Inject constructor(
         if (email.isNotEmpty() && password.isNotEmpty()){
             viewModelScope.launch {
                 try{
-                    //since Login API call returns only token, rest of the data is fetched afterwards
-                    val token = baseApi.login(email, password)
-                    var user = baseApi.getUserInfo(token)
-                    user = user.setToken(token)
+                    val credentials = UserLoginRequest(email, password)
+                    val user = authRepository.login(credentials)
                     Log.i(TAG, "logIn user: $user")
                     userProtoRepository.setUser(user)
                     _user.postValue(user)
                 } catch (e: HttpException){
-                    _error.postValue(R.string.incorrect_credentials)
+                    when(e.code()){
+                        401 -> _error.postValue(R.string.incorrect_credentials)
+                        else -> _error.postValue(R.string.unknown_error)
+                    }
+
                 }  catch (e: ConnectException){
                     _error.postValue(R.string.connection_error)
                 } catch (e: Error){

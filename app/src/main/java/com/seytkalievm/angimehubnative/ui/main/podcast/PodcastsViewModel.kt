@@ -7,7 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seytkalievm.angimehubnative.models.ArtistPreview
 import com.seytkalievm.angimehubnative.models.ShowPreview
-import com.seytkalievm.angimehubnative.network.BaseApi
+import com.seytkalievm.angimehubnative.network.artist.ArtistApi
+import com.seytkalievm.angimehubnative.network.shows.ShowsApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,7 +16,10 @@ import javax.inject.Inject
 
 private const val TAG = "PodcastViewModel"
 @HiltViewModel
-class PodcastsViewModel @Inject constructor(private val api: BaseApi): ViewModel() {
+class PodcastsViewModel @Inject constructor(
+    private val showsApi: ShowsApi,
+    private val artistApi: ArtistApi,
+): ViewModel() {
 
     private val _error = MutableLiveData(0)
     val error: LiveData<Int> get() = _error
@@ -29,8 +33,8 @@ class PodcastsViewModel @Inject constructor(private val api: BaseApi): ViewModel
     init{
         viewModelScope.launch {
             try{
-                val shows = api.getPopularPodcasts()
-                val artists = api.getPopularArtists()
+                val shows = showsApi.getPopularPodcasts()
+                val artists = artistApi.getPopularArtists()
                 _shows.postValue(shows)
                 _artist.postValue(artists)
             } catch (e: Exception){
