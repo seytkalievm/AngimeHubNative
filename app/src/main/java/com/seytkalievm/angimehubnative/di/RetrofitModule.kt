@@ -1,8 +1,9 @@
 package com.seytkalievm.angimehubnative.di
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+
 import com.seytkalievm.angimehubnative.network.BaseApi
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,7 +11,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -27,24 +28,21 @@ object RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideGson():Gson{
-        return GsonBuilder()
-            .setLenient()
-            .excludeFieldsWithoutExposeAnnotation()
-            .create()
+    fun provideMoshi():Moshi{
+        return Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
     }
 
     @Singleton
     @Provides
-    fun provideRetrofit(gson: Gson): BaseApi{
+    fun provideRetrofit(moshi: Moshi): BaseApi{
         return Retrofit.Builder()
             .baseUrl("http://35.246.32.45:80/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
             .client(client)
             .build()
             .create(BaseApi::class.java)
     }
-
-
 
 }

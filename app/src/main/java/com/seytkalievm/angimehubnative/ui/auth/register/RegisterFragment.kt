@@ -6,12 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.seytkalievm.angimehubnative.databinding.FragmentRegisterBinding
 import com.seytkalievm.angimehubnative.ui.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.ActivityScoped
 
 import javax.inject.Inject
 
@@ -33,6 +33,17 @@ class RegisterFragment @Inject constructor(): Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.i("RegisterFragment", this.toString())
+        var toast: Toast? = null
+
+        viewModel.error.observe(viewLifecycleOwner){
+            toast?.cancel()
+            toast = Toast.makeText(context, getString(it), Toast.LENGTH_SHORT)
+            toast?.show()
+        }
+
+        viewModel.user.observe(viewLifecycleOwner){
+            if (it != null) (activity as AuthActivity).startSession()
+        }
 
         viewModel.formState.observe(viewLifecycleOwner){
             if (it.firstNameError != null){

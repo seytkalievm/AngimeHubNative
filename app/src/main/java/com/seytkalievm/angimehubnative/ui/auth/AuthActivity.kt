@@ -1,11 +1,12 @@
 package com.seytkalievm.angimehubnative.ui.auth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
 import com.seytkalievm.angimehubnative.R
 import com.seytkalievm.angimehubnative.ui.auth.login.LoginFragment
 import com.seytkalievm.angimehubnative.ui.auth.register.RegisterFragment
+import com.seytkalievm.angimehubnative.ui.main.SessionActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
@@ -47,6 +48,11 @@ class AuthActivity : AppCompatActivity() {
             .attach(loginFragment)
             .show(loginFragment)
             .commit()
+    }
 
+    fun startSession(){
+        val intent = Intent(this, SessionActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
