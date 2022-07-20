@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seytkalievm.angimehubnative.R
 import com.seytkalievm.angimehubnative.models.User
-import com.seytkalievm.angimehubnative.network.BaseApi
 import com.seytkalievm.angimehubnative.network.auth.AuthRepository
 import com.seytkalievm.angimehubnative.network.auth.model.UserRegisterRequest
 import com.seytkalievm.angimehubnative.storage.UserProtoRepository

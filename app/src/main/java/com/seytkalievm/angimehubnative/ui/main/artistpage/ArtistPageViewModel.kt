@@ -6,9 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seytkalievm.angimehubnative.models.Artist
-import com.seytkalievm.angimehubnative.models.Show
 import com.seytkalievm.angimehubnative.models.ShowPreview
-import com.seytkalievm.angimehubnative.network.BaseApi
+import com.seytkalievm.angimehubnative.network.artist.ArtistApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +15,9 @@ import javax.inject.Inject
 private const val TAG = "ArtistPageViewModel"
 
 @HiltViewModel
-class ArtistPageViewModel @Inject constructor (private val api: BaseApi): ViewModel() {
+class ArtistPageViewModel @Inject constructor(
+    private val api: ArtistApi,
+) : ViewModel() {
     private val _artist = MutableLiveData<Artist>()
     val artist: LiveData<Artist> get() = _artist
 
