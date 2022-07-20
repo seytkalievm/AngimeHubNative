@@ -15,7 +15,7 @@ class ProfileViewModel @Inject constructor(private val userRepo: UserProtoReposi
 
     init {
         viewModelScope.launch {
-            user = userRepo.getUser().first()
+            user = userRepo.getUser()
         }
     }
 

@@ -34,7 +34,6 @@
 
                 <ImageView
                     android:id="@+id/fragment_profile_profile_iv"
-                    imageUrl="@{viewmodel.user.}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
