@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.main.profile.ProfileFragment">
+    tools:context=".presentation.session.profile.ProfileFragment">
 
     <data>
         <variable
             name="viewmodel"
-            type="com.seytkalievm.angimehubnative.ui.main.profile.ProfileViewModel" />
+            type="com.seytkalievm.angimehubnative.presentation.session.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

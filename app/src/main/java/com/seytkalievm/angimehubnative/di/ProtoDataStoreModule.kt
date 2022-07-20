@@ -1,7 +1,7 @@
 package com.seytkalievm.angimehubnative.di
 
 import android.content.Context
-import com.seytkalievm.angimehubnative.storage.UserProtoRepository
+import com.seytkalievm.angimehubnative.domain.repository.UserProtoRepository
 import com.seytkalievm.angimehubnative.storage.protodatastore.UserProtoRepositoryImpl
 import dagger.Module
 import dagger.Provides
@@ -16,7 +16,7 @@ object ProtoDataStoreModule {
 
     @Singleton
     @Provides
-    fun provideProtoDataStore(@ApplicationContext context: Context): UserProtoRepository{
+    fun provideProtoDataStore(@ApplicationContext context: Context): UserProtoRepository {
         return UserProtoRepositoryImpl(context)
     }
 

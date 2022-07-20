@@ -6,12 +6,12 @@
     app:startDestination="@id/standUpFragment">
     <fragment
         android:id="@+id/savedFragment"
-        android:name="com.seytkalievm.angimehubnative.ui.main.saved.SavedFragment"
+        android:name="com.seytkalievm.angimehubnative.presentation.session.saved.SavedFragment"
         android:label="@string/saved_recordings"
         tools:layout="@layout/fragment_saved" />
     <fragment
         android:id="@+id/podcastsFragment"
-        android:name="com.seytkalievm.angimehubnative.ui.main.podcast.PodcastsFragment"
+        android:name="com.seytkalievm.angimehubnative.presentation.session.podcast.PodcastsFragment"
         android:label="@string/podcasts"
         tools:layout="@layout/fragment_podcasts" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/standUpFragment"
-        android:name="com.seytkalievm.angimehubnative.ui.main.standup.StandUpFragment"
+        android:name="com.seytkalievm.angimehubnative.presentation.session.standup.StandUpFragment"
         android:label="@string/stand_up_shows"
         tools:layout="@layout/fragment_stand_up" >
         <action
@@ -29,12 +29,12 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.seytkalievm.angimehubnative.ui.main.profile.ProfileFragment"
+        android:name="com.seytkalievm.angimehubnative.presentation.session.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/artistPageFragment"
-        android:name="com.seytkalievm.angimehubnative.ui.main.artistpage.ArtistPageFragment"
+        android:name="com.seytkalievm.angimehubnative.presentation.session.artistpage.ArtistPageFragment"
         android:label="fragment_artist_page"
         tools:layout="@layout/fragment_artist_page" >
         <argument

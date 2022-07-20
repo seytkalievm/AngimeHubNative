@@ -1,14 +1,14 @@
 package com.seytkalievm.angimehubnative.di
 
-import com.seytkalievm.angimehubnative.network.artist.ArtistApi
-import com.seytkalievm.angimehubnative.network.artist.ArtistRepository
-import com.seytkalievm.angimehubnative.network.artist.ArtistRepositoryImpl
-import com.seytkalievm.angimehubnative.network.auth.AuthApi
-import com.seytkalievm.angimehubnative.network.auth.AuthRepository
-import com.seytkalievm.angimehubnative.network.auth.AuthRepositoryImpl
-import com.seytkalievm.angimehubnative.network.shows.ShowsApi
-import com.seytkalievm.angimehubnative.network.shows.ShowsRepository
-import com.seytkalievm.angimehubnative.network.shows.ShowsRepositoryImpl
+import com.seytkalievm.angimehubnative.data.remote.artist.ArtistApi
+import com.seytkalievm.angimehubnative.domain.repository.ArtistRepository
+import com.seytkalievm.angimehubnative.data.repository.ArtistRepositoryImpl
+import com.seytkalievm.angimehubnative.data.remote.auth.AuthApi
+import com.seytkalievm.angimehubnative.domain.repository.AuthRepository
+import com.seytkalievm.angimehubnative.data.repository.AuthRepositoryImpl
+import com.seytkalievm.angimehubnative.data.remote.show.ShowsApi
+import com.seytkalievm.angimehubnative.domain.repository.ShowsRepository
+import com.seytkalievm.angimehubnative.data.repository.ShowsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +21,7 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideAuthRepository(authApi: AuthApi):AuthRepository{
+    fun provideAuthRepository(authApi: AuthApi): AuthRepository {
         return AuthRepositoryImpl(authApi)
     }
 
@@ -33,7 +33,7 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideArtistRepository(api: ArtistApi): ArtistRepository{
+    fun provideArtistRepository(api: ArtistApi): ArtistRepository {
         return ArtistRepositoryImpl(api)
     }
 }

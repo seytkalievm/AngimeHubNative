@@ -5,7 +5,7 @@
     android:id="@+id/registerFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.register.RegisterFragment"
+    tools:context=".presentation.auth.register.RegisterFragment"
     android:background="@color/dark_blue">
 
     <TextView

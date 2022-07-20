@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.podcast.PodcastsFragment">
+    tools:context=".presentation.session.podcast.PodcastsFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/TextInput"
