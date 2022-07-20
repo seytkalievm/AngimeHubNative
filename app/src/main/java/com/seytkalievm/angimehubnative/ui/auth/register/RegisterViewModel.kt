@@ -5,22 +5,41 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.seytkalievm.angimehubnative.R
+import com.seytkalievm.angimehubnative.models.NewUser
+import com.seytkalievm.angimehubnative.models.User
+import com.seytkalievm.angimehubnative.network.BaseApi
+import com.seytkalievm.angimehubnative.storage.UserProtoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.net.ConnectException
 import javax.inject.Inject
 
-val TAG = "RegistrationViewModel"
+const val TAG = "RegistrationViewModel"
 
-class RegisterViewModel @Inject constructor(): ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(
+    private val userProtoRepository: UserProtoRepository,
+    private val baseApi: BaseApi
+): ViewModel() {
     private var firstName = ""
     private var secondName = ""
     private var email = ""
     private var password = ""
     private var confPassword = ""
 
+    private val _error = MutableLiveData<Int>()
+    val error: LiveData<Int> get() = _error
+
     private val _formState = MutableLiveData(RegisterFormState())
     val formState: LiveData<RegisterFormState> get() = _formState
     private var isFormValid = false
 
+    private val _user = MutableLiveData<User?>(null)
+    val user: LiveData<User?> get() = _user
 
     fun credentialsChanged(
         firstName: String? = null,
@@ -39,8 +58,32 @@ class RegisterViewModel @Inject constructor(): ViewModel() {
     fun register(){
         validateForm()
         if (isFormValid){
-            //TODO - add API call
-            Log.i(TAG, "$firstName, $secondName, $email, $password")
+            viewModelScope.launch {
+                try{
+                    // Since API does not return user Token after registration
+                    // in order not to redirect user to login page for better experience
+                    // user token and all corresponding data is fetched here
+                    Log.i(TAG, "$firstName, $secondName, $email, $password")
+                    baseApi.register(NewUser(firstName, secondName, email, password))
+                    val token = baseApi.login(email, password)
+                    var user = baseApi.getUserInfo(token)
+                    user = user.setToken(token)
+                    Log.i(TAG, "Register user: $user")
+                    userProtoRepository.setUser(user)
+                    _user.postValue(user)
+
+                } catch (e: HttpException){
+                    _error.postValue(R.string.user_already_exist)
+                } catch (e: ConnectException){
+                    _error.postValue(R.string.connection_error)
+                } catch (e:Exception){
+                    Log.e(TAG, "register: $e")
+                    _error.postValue(R.string.unknown_error)
+                } catch (e: Error){
+                    Log.e(TAG, "Login: $e")
+                    _error.postValue(R.string.unknown_error)
+                }
+            }
         }
     }
 
@@ -107,5 +150,9 @@ class RegisterViewModel @Inject constructor(): ViewModel() {
         }
     }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+        Log.i(TAG, "onCleared")
+    }
 }

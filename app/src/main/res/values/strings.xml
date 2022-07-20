@@ -24,6 +24,29 @@
     <string name="invalid_password_no_lower">Password must contain at least one lower-case letter [a-z]</string>
     <string name="invalid_password_numeric">Password must contain at least one digit [0–9]</string>
     <string name="password_do_not_match">Passwords do not match</string>
+    <string name="incorrect_credentials">Wrong email or password</string>
+    <string name="connection_error">No Internet connection. Try again later</string>
+    <string name="unknown_error">Unknown error. Try again later</string>
+    <string name="user_already_exist">User with this email already exist</string>
+    <string name="empty_email">Please, enter email</string>
+    <string name="empty_password">Please, enter password</string>
     <!-- End error messages -->
 
+    <string name="logging_in">Logging in</string>
+    <string name="show_name">Show name</string>
+    <string name="podcast_name">Podcast name</string>
+    <string name="artist_name">Artist name</string>
+    <string name="popular_artists">Popular artists</string>
+    <string name="popular_stand_ups">Popular Stand-Up shows</string>
+    <string name="popular_podcasts">Popular Podcasts</string>
+    <string name="duration">show duration</string>
+    <string name="save_to_favourites">Save to favourites</string>
+    <string name="show_preview">Show preview photo</string>
+    <string name="profile">My profile</string>
+    <string name="artists_or_shows">Artists or shows</string>
+    <string name="saved_shows">Saved Stand-up shows and Podcasts</string>
+    <string name="user_name">Firstname SecondName</string>
+    <string name="become_artist">Become an Artist</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="profile_pic">Profile picture</string>
 </resources>
