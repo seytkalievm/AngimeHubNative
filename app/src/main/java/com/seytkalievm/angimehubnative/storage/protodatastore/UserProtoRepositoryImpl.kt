@@ -1,13 +1,10 @@
-package com.seytkalievm.angimehubnative.storage
+package com.seytkalievm.angimehubnative.storage.protodatastore
 
 import android.content.Context
-import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import com.seytkalievm.angimehubnative.models.User
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.flow.Flow
+import com.seytkalievm.angimehubnative.storage.UserProtoRepository
+import com.seytkalievm.angimehubnative.storage.UserSerializer
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
@@ -18,18 +15,25 @@ private val Context.dataStore by dataStore(
     serializer = UserSerializer
 )
 
-class UserProtoRepository @Inject constructor(context: Context){
+class UserProtoRepositoryImpl @Inject constructor(context: Context): UserProtoRepository {
 
     private val dataStore = context.dataStore
     private lateinit var _token: String
-    val token get() = _token
 
+
+    override
+    fun getToken(): String{
+        return _token
+    }
+
+    override
     suspend fun getUser(): User {
         val user = dataStore.data.first()
         _token = user.token
         return user
     }
 
+    override
     suspend fun setUser(user: User) {
         dataStore.updateData {
             it.copy(
@@ -42,6 +46,7 @@ class UserProtoRepository @Inject constructor(context: Context){
         }
     }
 
+    override
     suspend fun deleteUser(){
         dataStore.updateData {
             it.copy(

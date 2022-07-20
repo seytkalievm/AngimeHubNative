@@ -49,4 +49,6 @@
     <string name="become_artist">Become an Artist</string>
     <string name="sign_out">Sign Out</string>
     <string name="profile_pic">Profile picture</string>
+    <string name="show_all">Show all</string>
+    <string name="artist_profile_pic">Artist profile picture</string>
 </resources>

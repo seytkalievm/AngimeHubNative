@@ -1,22 +1,17 @@
 package com.seytkalievm.angimehubnative.ui.main
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.seytkalievm.angimehubnative.R
 import com.seytkalievm.angimehubnative.databinding.ActivitySessionBinding
-import com.seytkalievm.angimehubnative.ui.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 const val TAG = "SessionActivity"
 
@@ -42,12 +37,13 @@ class SessionActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(bottomNavBar, navController)
 
         bottomNavBar.setOnItemReselectedListener { item ->
-            val reselectedDestinationId = item.itemId
-            navController.popBackStack(reselectedDestinationId, inclusive = false)
+            binding.sessionShowProfileIb.visibility = VISIBLE
+            navController.popBackStack(item.itemId, inclusive = false)
         }
 
         bottomNavBar.setOnItemSelectedListener { item ->
             NavigationUI.onNavDestinationSelected(item, navController)
+            binding.sessionShowProfileIb.visibility = VISIBLE
             navController.popBackStack(item.itemId, false)
             true
         }
@@ -58,6 +54,7 @@ class SessionActivity : AppCompatActivity() {
     override fun onBackPressed() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         bottomNavBar.visibility = VISIBLE
+        binding.sessionShowProfileIb.visibility = VISIBLE
         super.onBackPressed()
     }
 
@@ -77,14 +74,14 @@ class SessionActivity : AppCompatActivity() {
     private fun showProfile(){
         toolBar.setTitle(R.string.profile)
         bottomNavBar.uncheckAllItems()
+        binding.sessionShowProfileIb.visibility = GONE
         navController.navigate(R.id.profileFragment)
     }
 
-    fun logout(){
-        val intent = Intent(this, AuthActivity::class.java)
-        startActivity(intent)
-        Log.i(TAG, "logout: trying to finish an activity")
-        finish()
-    }
 
+    fun updateToolbar(title: String, supportNavigateBack: Boolean){
+        toolBar.title = title
+        supportActionBar?.setDisplayHomeAsUpEnabled(supportNavigateBack)
+        binding.sessionShowProfileIb.visibility = GONE
+    }
 }

@@ -13,15 +13,32 @@
         android:id="@+id/podcastsFragment"
         android:name="com.seytkalievm.angimehubnative.ui.main.podcast.PodcastsFragment"
         android:label="@string/podcasts"
-        tools:layout="@layout/fragment_podcasts" />
+        tools:layout="@layout/fragment_podcasts" >
+        <action
+            android:id="@+id/action_podcastsFragment_to_artistPageFragment"
+            app:destination="@id/artistPageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/standUpFragment"
         android:name="com.seytkalievm.angimehubnative.ui.main.standup.StandUpFragment"
         android:label="@string/stand_up_shows"
-        tools:layout="@layout/fragment_stand_up" />
+        tools:layout="@layout/fragment_stand_up" >
+        <action
+            android:id="@+id/action_standUpFragment_to_artistPageFragment"
+            app:destination="@id/artistPageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.seytkalievm.angimehubnative.ui.main.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/artistPageFragment"
+        android:name="com.seytkalievm.angimehubnative.ui.main.artistpage.ArtistPageFragment"
+        android:label="fragment_artist_page"
+        tools:layout="@layout/fragment_artist_page" >
+        <argument
+            android:name="artist_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

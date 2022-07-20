@@ -43,13 +43,14 @@
             <TextView
                 android:id="@+id/preview_show_name_tv"
                 style="@style/RegularText"
+                android:ellipsize="marquee"
                 android:gravity="start"
-                android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:text="@{show.name}"
-                tools:text="@string/show_name"/>
+                tools:text="@string/show_name"
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/preview_show_artist_tv"
