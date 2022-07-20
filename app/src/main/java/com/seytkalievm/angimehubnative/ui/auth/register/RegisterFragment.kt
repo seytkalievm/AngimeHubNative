@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.seytkalievm.angimehubnative.R
 import com.seytkalievm.angimehubnative.databinding.FragmentRegisterBinding
 import com.seytkalievm.angimehubnative.ui.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +23,7 @@ class RegisterFragment @Inject constructor(): Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
 
-    private val viewModel: RegisterViewModel by viewModels()
+    private val viewModel: RegisterViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +37,7 @@ class RegisterFragment @Inject constructor(): Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.i("RegisterFragment", this.toString())
         var toast: Toast? = null
+        val navController = this.findNavController()
 
         viewModel.error.observe(viewLifecycleOwner){
             toast?.cancel()
@@ -87,7 +91,7 @@ class RegisterFragment @Inject constructor(): Fragment() {
             }
 
             registerSignInBtn.setOnClickListener{
-                (activity as AuthActivity).goToLogin()
+                navController.navigate(R.id.loginFragment2)
             }
 
             registerSignUpBtn.setOnClickListener {
