@@ -7,17 +7,49 @@
     android:background="@color/dark_blue"
     tools:context=".ui.main.SessionActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/main_activity_toolbar"
-        android:layout_width="0dp"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/main_activity_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="16dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_activity_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_blue"
+            app:layout_constraintBottom_toTopOf="@+id/session_activity_host_fragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/ToolbarHeader">
+
+            <ImageButton
+                android:id="@+id/session_show_profile_ib"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="8dp"
+                android:background="@drawable/circle"
+                android:clickable="true"
+                android:focusable="true"
+                android:minWidth="40dp"
+                android:minHeight="40dp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/dark_blue_60"
+                android:contentDescription="@string/profile" />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <fragment
-        android:id="@+id/main_activity_host_fragment"
+        android:id="@+id/session_activity_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -26,14 +58,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_activity_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
         app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_menu"
+        app:itemIconSize="28dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark_blue"
+        android:background="@color/dark_blue_80"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

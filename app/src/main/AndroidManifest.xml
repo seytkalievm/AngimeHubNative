@@ -22,8 +22,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.main.SessionActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true" >
